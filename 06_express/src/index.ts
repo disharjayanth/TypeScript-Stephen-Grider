@@ -1,14 +1,13 @@
+import bodyParser from "body-parser";
 import express, { Request, Response } from "express";
+import cookieSession from "cookie-session";
+import { router } from "./routes/loginRoutes";
 
 const app = express();
 
-app.get("/", (req: Request, res: Response) => {
-    res.send(`
-    <div>
-    <h1>Hi</h1>
-    </div>
-    `);
-});
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieSession({ keys: ["aaaa"] }));
+app.use(router);
 
 app.listen(3000, () => {
     console.log("Listening @PORT:3000");
