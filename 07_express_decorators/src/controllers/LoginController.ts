@@ -1,8 +1,10 @@
 import { Request, Response } from "express";
-import { bodyValidator, controller, get, post } from "./decorators";
+import { controller, bodyValidator, get, post } from "./decorators";
 
+// controller is class decorator
 @controller("/")
 class LoginController {
+    // get is method decorator
     @get("login")
     getLogin(req: Request, res: Response): void {
         res.send(`
@@ -20,6 +22,7 @@ class LoginController {
         `);
     }
 
+    // post, bodyValidator is method validator
     @post("login")
     @bodyValidator("email", "password")
     postLogin(req: Request, res: Response): void {
@@ -33,6 +36,7 @@ class LoginController {
         }
     }
 
+    // get is method decorator
     @get("logout")
     getLogout(req: Request, res: Response): void {
         req.session = undefined;
